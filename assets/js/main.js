@@ -200,7 +200,7 @@
     }
 
     // Get reCAPTCHA token and add to form data
-    grecaptcha.execute('6Lc41McqAAAAAAFKy_RusMWyHFdc1DXCscGEFga_', { action: 'submit' }).then(function (token) {
+    grecaptcha.execute('6Lel3McqAAAAAIwI8dCSdfusWJKHbzIGMtakxAQ5', { action: 'submit' }).then(function (token) {
         // Append the reCAPTCHA token to the form data
         formData.append('g-recaptcha-response', token);
 
