@@ -24,11 +24,15 @@
 
   <!-- Main CSS File -->
   <link href="assets/css/main.css" rel="stylesheet">
+  <script src="https://www.google.com/recaptcha/api.js?render=6Lc41McqAAAAAAFKy_RusMWyHFdc1DXCscGEFga_"></script>
 
 </head>
 
 <body class="index-page">
 
+<div class="popup-overlay" id="popupOverlay">
+
+</div>
   <header id="header" class="header d-flex align-items-center fixed-top">
     <div class="header-container container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
 
@@ -50,7 +54,7 @@
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
       </nav>
 
-      <a class="btn-getstarted" href="index.html#about">Get Started</a>
+      <a class="btn-getstarted" href="index.html#about">Get Free Quote</a>
 
     </div>
   </header>
@@ -59,6 +63,7 @@
 
     <!-- Hero Section -->
     <section id="hero" class="hero section">
+
 
       <div class="container" data-aos="fade-up" data-aos-delay="100">
 
@@ -81,7 +86,7 @@
               </p>
 
               <div class="hero-buttons">
-                <a href="#contact" class="btn btn-primary me-0 me-sm-2 mx-1">Get Started</a>
+                <a href="#contact" class="btn btn-primary me-0 me-sm-2 mx-1">Get Free Quote</a>
               </div>
             </div>
           </div>
@@ -155,6 +160,7 @@
       </div>
 
     </section><!-- /Hero Section -->
+
 
     <!-- About Section -->
     <section id="about" class="about section">
@@ -478,7 +484,7 @@ Our team of more than 35 developers and designers is dedicated to meeting the cl
           <div class="col-lg-8 mx-auto text-center">
             <h2 class="display-4 mb-4">Contact Us Today – Let’s build your success together!</h2>
             <p class="mb-4">Partner with ALPS for cutting-edge IT solutions tailored to your needs. Whether you need security, cloud services, or digital marketing, we have the expertise to help you grow.</p>
-            <a href="#" class="btn btn-cta">Get Started Now!</a>
+            <a href="#" class="btn btn-cta">Get Free Quote!</a>
           </div>
 
           <!-- Abstract Background Elements -->
@@ -917,43 +923,39 @@ We ensure a seamless migration to the cloud, setting up scalable storage, collab
             </div>
           </div>
 
-          <div class="col-lg-7">
-            <div class="contact-form" data-aos="fade-up" data-aos-delay="300">
-              <h3>Get In Touch</h3>
+      <div class="col-lg-7">
+  <div class="contact-form" data-aos="fade-up" data-aos-delay="300">
+    <h3>Get In Touch</h3>
 
-              <form action="forms/contact.php" method="post" class="php-email-form" data-aos="fade-up" data-aos-delay="200">
-                <div class="row gy-4">
+    <form id="contactForm" class="php-email-form" data-aos="fade-up" data-aos-delay="200">
+      <div class="row gy-4">
+        <div class="col-md-6">
+          <input type="text" name="name" class="form-control" placeholder="Your Name" required>
+        </div>
 
-                  <div class="col-md-6">
-                    <input type="text" name="name" class="form-control" placeholder="Your Name" required="">
-                  </div>
+        <div class="col-md-6">
+          <input type="email" class="form-control" name="email" placeholder="Your Email" required>
+        </div>
 
-                  <div class="col-md-6 ">
-                    <input type="email" class="form-control" name="email" placeholder="Your Email" required="">
-                  </div>
+        <div class="col-12">
+          <input type="text" class="form-control" name="subject" placeholder="Subject" required>
+        </div>
 
-                  <div class="col-12">
-                    <input type="text" class="form-control" name="subject" placeholder="Subject" required="">
-                  </div>
+        <div class="col-12">
+          <textarea class="form-control" name="message" rows="6" placeholder="Message" required></textarea>
+        </div>
 
-                  <div class="col-12">
-                    <textarea class="form-control" name="message" rows="6" placeholder="Message" required=""></textarea>
-                  </div>
+        <div class="col-12 text-center">
+          <div class="loading" style="display: none;">Loading</div>
+          <div class="error-message" style="display: none;"></div>
+          <div class="sent-message" style="display: none;">Your message has been sent. Thank you!</div>
 
-                  <div class="col-12 text-center">
-                    <div class="loading">Loading</div>
-                    <div class="error-message"></div>
-                    <div class="sent-message">Your message has been sent. Thank you!</div>
-
-                    <button type="submit" class="btn">Send Message</button>
-                  </div>
-
-                </div>
-              </form>
-
-            </div>
-          </div>
-
+          <button type="submit" class="btn">Send Message</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
         </div>
 
       </div>
@@ -1033,7 +1035,7 @@ We ensure a seamless migration to the cloud, setting up scalable storage, collab
 </div>
 
     <div class="container copyright text-center mt-4">
-      <p>© <span id="currentYear"></span> <strong class="px-1 sitename">ALPS Software Solutions</strong> <span>All Rights Reserved</span></p>
+      <p>© <span id="currentYear"></span> <strong class="px-1 sitename">ALPS - Advanced Logical Performance Solution</strong> <span>All Rights Reserved</span></p>
     </div>
   </footer>
 

@@ -178,3 +178,63 @@
 
 // Get the current year and insert it into the element with id 'currentYear'
   document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+ document.getElementById('contactForm').addEventListener('submit', function (event) {
+    event.preventDefault(); // Prevent the default form submission
+    console.log("Form submission intercepted"); // Debugging
+
+    const form = event.target;
+    const formData = new FormData(form);
+    const thankYouMessage = form.querySelector('.sent-message');
+    const errorMessage = form.querySelector('.error-message');
+    const loading = form.querySelector('.loading');
+
+    // Show loading indicator
+    loading.style.display = 'block';
+    errorMessage.style.display = 'none';
+    thankYouMessage.style.display = 'none';
+
+    // Debugging: Log form data
+    for (let [key, value] of formData.entries()) {
+        console.log(key, value);
+    }
+
+    // Get reCAPTCHA token and add to form data
+    grecaptcha.execute('6Lc41McqAAAAAAFKy_RusMWyHFdc1DXCscGEFga_', { action: 'submit' }).then(function (token) {
+        // Append the reCAPTCHA token to the form data
+        formData.append('g-recaptcha-response', token);
+
+        // Send the form data using fetch
+        fetch('https://formspree.io/f/xbldyjka', {
+            method: 'POST',
+            body: formData,
+            headers: {
+                'Accept': 'application/json'
+            }
+        })
+        .then(response => {
+            console.log("Response received:", response); // Debugging
+            return response.json();
+        })
+        .then(data => {
+            console.log("Response data:", data); // Debugging
+            if (data.ok) {
+                // Hide the form and show the thank you message
+                form.style.display = 'none';
+                thankYouMessage.style.display = 'block';
+            } else {
+                throw new Error('Form submission failed');
+            }
+        })
+        .catch(error => {
+            console.error("Error:", error); // Debugging
+            // Show error message
+            errorMessage.textContent = 'An error occurred while submitting the form. Please try again.';
+            errorMessage.style.display = 'block';
+        })
+        .finally(() => {
+            // Hide loading indicator
+            loading.style.display = 'none';
+        });
+    });
+});
