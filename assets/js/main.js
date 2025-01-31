@@ -238,3 +238,7 @@
         });
     });
 });
+
+function toggleWebsiteField(show) {
+    document.getElementById('websiteField').style.display = show ? 'block' : 'none';
+  }
