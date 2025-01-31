@@ -920,12 +920,12 @@ We ensure a seamless migration to the cloud, setting up scalable storage, collab
             </div>
           </div>
 
-      <div class="col-lg-7">
+<div class="col-lg-7">
   <div class="contact-form" data-aos="fade-up" data-aos-delay="300">
     <h3>Get In Touch</h3>
-
-    <form id="contactForm" class="php-email-form" data-aos="fade-up" data-aos-delay="200">
+        <form id="work-with-us-form" class="php-email-form" data-aos="fade-up" data-aos-delay="200">
       <div class="row gy-4">
+
         <div class="col-md-6">
           <input type="text" name="name" class="form-control" placeholder="Your Name" required>
         </div>
@@ -934,12 +934,89 @@ We ensure a seamless migration to the cloud, setting up scalable storage, collab
           <input type="email" class="form-control" name="email" placeholder="Your Email" required>
         </div>
 
+        <div class="col-md-6">
+          <input type="text" class="form-control" name="phone" placeholder="Your Phone (Optional)">
+        </div>
+
+        <div class="col-md-6">
+          <input type="text" class="form-control" name="company" placeholder="Company Name (Optional)">
+        </div>
+
+        <!-- Do you have a website? -->
         <div class="col-12">
-          <input type="text" class="form-control" name="subject" placeholder="Subject" required>
+          <label class="form-label">Do you have a website?</label>
+          <div class="d-flex">
+            <div class="form-check me-3">
+              <input class="form-check-input" type="radio" name="has_website" value="yes" onclick="toggleWebsiteField(true)">
+              <label class="form-check-label">Yes</label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="has_website" value="no" onclick="toggleWebsiteField(false)" checked>
+              <label class="form-check-label">No</label>
+            </div>
+          </div>
+        </div>
+
+        <!-- Website URL Field (Hidden by Default) -->
+        <div class="col-12" id="websiteField" style="display: none;">
+          <input type="url" class="form-control" name="website" placeholder="Your Website URL">
+        </div>
+
+        <!-- Multi-Select Checkboxes for Services -->
+        <div class="col-12">
+          <label class="form-label">Which services are you interested in?</label>
+          <div class="d-flex flex-wrap">
+            <div class="form-check me-3">
+              <input class="form-check-input" type="checkbox" name="services[]" value="Website Development">
+              <label class="form-check-label">Website Development</label>
+            </div>
+            <div class="form-check me-3">
+              <input class="form-check-input" type="checkbox" name="services[]" value="Custom Landing Page">
+              <label class="form-check-label">Custom Landing Page</label>
+            </div>
+            <div class="form-check me-3">
+              <input class="form-check-input" type="checkbox" name="services[]" value="Software/Application Development">
+              <label class="form-check-label">Software/Application Development</label>
+            </div>
+            <div class="form-check me-3">
+              <input class="form-check-input" type="checkbox" name="services[]" value="SEO">
+              <label class="form-check-label">SEO (Search Engine Optimization)</label>
+            </div>
+            <div class="form-check me-3">
+              <input class="form-check-input" type="checkbox" name="services[]" value="Social Media Marketing">
+              <label class="form-check-label">Social Media Marketing</label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" name="services[]" value="Email Marketing">
+              <label class="form-check-label">Email Marketing</label>
+            </div>
+          </div>
         </div>
 
         <div class="col-12">
-          <textarea class="form-control" name="message" rows="6" placeholder="Message" required></textarea>
+          <textarea class="form-control" name="message" rows="6" placeholder="Briefly describe your project or inquiry" required></textarea>
+        </div>
+
+        <div class="col-12">
+          <label class="form-label">Preferred Contact Method:</label>
+          <div class="d-flex flex-wrap">
+            <div class="form-check me-3">
+              <input class="form-check-input" type="radio" name="contact_method" value="Email" checked>
+              <label class="form-check-label">Email</label>
+            </div>
+            <div class="form-check me-3">
+              <input class="form-check-input" type="radio" name="contact_method" value="Phone Call">
+              <label class="form-check-label">Phone Call</label>
+            </div>
+            <div class="form-check me-3">
+              <input class="form-check-input" type="radio" name="contact_method" value="WhatsApp">
+              <label class="form-check-label">WhatsApp</label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="contact_method" value="Any">
+              <label class="form-check-label">Any</label>
+            </div>
+          </div>
         </div>
 
         <div class="col-12 text-center">
@@ -953,7 +1030,10 @@ We ensure a seamless migration to the cloud, setting up scalable storage, collab
     </form>
   </div>
 </div>
-        </div>
+<div id="success-message" class="alert alert-success text-center" style="display: none;">
+   🎉 Thank you! Your message has been sent successfully. We'll get back to you soon.
+</div>
+</div>
 
       </div>
 
@@ -1064,7 +1144,44 @@ We ensure a seamless migration to the cloud, setting up scalable storage, collab
         };
         t['claspo'] = t['claspo'] || f;
     }(window, document, 'script', 'ADF2AF75446344D7B0FF6CB2779F4A36');
-</script><script>claspo('init');</script>
+</script><script>claspo('init');</script> <script type="text/javascript">document.getElementById("work-with-us-form").addEventListener("submit", function(e) {
+    e.preventDefault();
+
+    let hasWebsite = document.querySelector("input[name='has_website']:checked").value;
+    let websiteInput = document.querySelector("input[name='website']");
+
+    let formData = {
+        name: document.querySelector("input[name='name']").value.trim(),
+        email: document.querySelector("input[name='email']").value.trim(),
+        phone: document.querySelector("input[name='phone']").value.trim() || "N/A",
+        company: document.querySelector("input[name='company']").value.trim() || "N/A",
+        has_website: hasWebsite,
+        website: hasWebsite === "yes" && websiteInput ? websiteInput.value.trim() || "N/A" : "N/A",
+        services: Array.from(document.querySelectorAll("input[name='services[]']:checked"))
+                       .map(checkbox => checkbox.value),
+        message: document.querySelector("textarea[name='message']").value.trim(),
+        contact_method: document.querySelector("input[name='contact_method']:checked").value
+    };
+
+    fetch("https://script.google.com/macros/s/AKfycby0v_QVI02WX3Nhc4vBWNE3w9_KXmJrbtybQh9wVVW_w27oaSM0RsJN_eozYRiobXPzqg/exec", {
+        method: "POST",
+        mode: "no-cors",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData)
+    })
+    .then(() => {
+        document.querySelector(".sent-message").style.display = "block";
+        document.getElementById("work-with-us-form").reset();
+        
+        // Hide the form and show the success message
+        document.getElementById("work-with-us-form").style.display = "none";
+        document.getElementById("success-message").style.display = "block";
+    })
+    .catch((error) => {
+        document.querySelector(".error-message").style.display = "block";
+        console.error("Error:", error);
+    });
+});</script>
 </body>
 
 </html>

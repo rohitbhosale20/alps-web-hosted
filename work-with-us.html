@@ -138,7 +138,7 @@
   <div class="contact-form p-4 rounded" style="background-color: #f8f9fa;" data-aos="fade-up" data-aos-delay="300">
     <h3 class="text-center mb-4">Get In Touch</h3>
 
-    <form id="contactForm" class="php-email-form" data-aos="fade-up" data-aos-delay="200">
+    <form id="work-with-us-form" class="php-email-form" data-aos="fade-up" data-aos-delay="200">
       <div class="row gy-4">
 
         <div class="col-md-6">
@@ -245,6 +245,9 @@
     </form>
   </div>
 </div>
+<div id="success-message" class="alert alert-success text-center" style="display: none;">
+   🎉 Thank you! Your message has been sent successfully. We'll get back to you soon.
+</div>
           </div>
 
         </div>
@@ -345,7 +348,47 @@
   <script src="assets/js/main.js"></script>
   <script type="text/javascript">function toggleWebsiteField(show) {
     document.getElementById('websiteField').style.display = show ? 'block' : 'none';
-  }</script>
+  }</script> 
+<script type="text/javascript">
+document.getElementById("work-with-us-form").addEventListener("submit", function(e) {
+    e.preventDefault();
+
+    let hasWebsite = document.querySelector("input[name='has_website']:checked").value;
+    let websiteInput = document.querySelector("input[name='website']");
+
+    let formData = {
+        name: document.querySelector("input[name='name']").value.trim(),
+        email: document.querySelector("input[name='email']").value.trim(),
+        phone: document.querySelector("input[name='phone']").value.trim() || "N/A",
+        company: document.querySelector("input[name='company']").value.trim() || "N/A",
+        has_website: hasWebsite,
+        website: hasWebsite === "yes" && websiteInput ? websiteInput.value.trim() || "N/A" : "N/A",
+        services: Array.from(document.querySelectorAll("input[name='services[]']:checked"))
+                       .map(checkbox => checkbox.value),
+        message: document.querySelector("textarea[name='message']").value.trim(),
+        contact_method: document.querySelector("input[name='contact_method']:checked").value
+    };
+
+    fetch("https://script.google.com/macros/s/AKfycby0v_QVI02WX3Nhc4vBWNE3w9_KXmJrbtybQh9wVVW_w27oaSM0RsJN_eozYRiobXPzqg/exec", {
+        method: "POST",
+        mode: "no-cors",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData)
+    })
+    .then(() => {
+        document.querySelector(".sent-message").style.display = "block";
+        document.getElementById("work-with-us-form").reset();
+        
+        // Hide the form and show the success message
+        document.getElementById("work-with-us-form").style.display = "none";
+        document.getElementById("success-message").style.display = "block";
+    })
+    .catch((error) => {
+        document.querySelector(".error-message").style.display = "block";
+        console.error("Error:", error);
+    });
+});
+</script>
 </body>
 
 </html>
