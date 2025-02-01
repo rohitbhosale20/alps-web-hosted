@@ -369,6 +369,9 @@
 document.getElementById("work-with-us-form").addEventListener("submit", function(e) {
     e.preventDefault();
 
+    // Enable the loading indicator as soon as the form is submitted
+    document.querySelector(".loading").style.display = "block";
+
     let hasWebsite = document.querySelector("input[name='has_website']:checked").value;
     let websiteInput = document.querySelector("input[name='website']");
 
@@ -392,14 +395,18 @@ document.getElementById("work-with-us-form").addEventListener("submit", function
         body: JSON.stringify(formData)
     })
     .then(() => {
+        // Hide the loading indicator upon success
+        document.querySelector(".loading").style.display = "none";
         document.querySelector(".sent-message").style.display = "block";
         document.getElementById("work-with-us-form").reset();
         
-        // Hide the form and show the success message
+        // Optionally hide the form and show a success message container
         document.getElementById("work-with-us-form").style.display = "none";
         document.getElementById("success-message").style.display = "block";
     })
     .catch((error) => {
+        // Hide the loading indicator even if there's an error
+        document.querySelector(".loading").style.display = "none";
         document.querySelector(".error-message").style.display = "block";
         console.error("Error:", error);
     });
